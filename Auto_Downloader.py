@@ -6,7 +6,7 @@ try:
         cmd = f.readline()
 except FileNotFoundError:
     print("You need to configure it first before you run, please add a link in config")
-    return()
+    quit()
 
 def main():
     if link == " ":
