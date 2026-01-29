@@ -57,13 +57,19 @@ def get_end(link):
 def get_start():
     with open("Log.txt", "r+") as file:
             start,pos = 0,0
-            for line in file:
-                if line == "STOP-HERE \n" :
-                    break
-                start = start + 1
-            file.seek(0)
-            pos = file.tell()
-            return(start,pos)
+            try:
+                for line in file:
+                    if line == "STOP-HERE \n" :
+                        break
+                    start = start + 1
+                pos = file.tell()
+            except OSError:
+                file.seek(0,0)
+                while file.readline() != "STOP-HERE \n":
+                    continue
+                pos = file.tell()
+            finally:
+                return(start,pos)
 
 
 
